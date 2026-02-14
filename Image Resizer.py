@@ -1,20 +1,26 @@
-
 import cv2
 
-# Load the image
+image_path = "example.jpg"
+image = cv2.imread(image_path)
 
-image = cv2.imread('L1\example.jpg')
+if image is None:
+    print("Error: Could not load image.")
+    exit()
 
-# Resize the window to a specific size without resizing the image
+print("Image loaded successfully!")
 
-cv2.namedWindow('Loaded Image', cv2.WINDOW_NORMAL) # Create a resizable window
-cv2.resizeWindow('Loaded Image', 800, 500) # Set the window size to 800x500 (width x height)
+small = cv2.resize(image, (200, 200))
+medium = cv2.resize(image, (400, 400))
+large = cv2.resize(image, (600, 600))
 
-# Display the image in the resized window
+cv2.imshow("Small Image (200x200)", small)
+cv2.imshow("Medium Image (400x400)", medium)
+cv2.imshow("Large Image (600x600)", large)
 
-cv2.imshow('Loaded Image', image)
-cv2.waitKey(0) # Wait for a key press
-cv2.destroyAllWindows() # Close the window
+cv2.imwrite("input_image_small.jpg", small)
+cv2.imwrite("input_image_medium.jpg", medium)
+cv2.imwrite("input_image_large.jpg", large)
 
-# Print image properties
-print(f"Image Dimensions: {image.shape}")
+print("Resized images saved successfully!")
+
+cv2.waitKey(0)
